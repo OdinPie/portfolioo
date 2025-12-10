@@ -1,0 +1,124 @@
+:root{
+  --bg: #ffffff;
+  --fg: #0a1a2b;
+  --accent: #2563eb;
+  --accent-bright: #0ea5ff;
+  --sidebar-bg: #0b3a66;
+  --muted: #1e3a8a;
+  --border: #d6e4ff;
+  --shadow: 0 8px 24px rgba(30,64,175,0.06);
+  --sidebar-w: 33.333vw;
+  --sidebar-min: 260px;
+  --sidebar-max: 420px;
+  --sidebar-size: clamp(var(--sidebar-min), var(--sidebar-w), var(--sidebar-max));
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, Roboto, system-ui, -apple-system, 'Segoe UI', sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
+
+.skip-link{position:absolute;left:-999px;top:12px;background:var(--bg);padding:8px 12px;border-radius:999px;border:1px solid var(--accent);z-index:60}
+.skip-link:focus{left:12px}
+
+.wrap{margin:0;padding:0;display:block;align-items:start}
+
+/* Sidebar: fixed to left edge, padding only on top/bottom to avoid gap; flex layout */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-size);height:100vh;padding:16px 12px;border-radius:0;background:var(--sidebar-bg);color:#fff;border-right:1px solid rgba(255,255,255,0.06);box-shadow:var(--shadow);overflow:auto;display:flex;margin-right:10px;z-index:1}
+
+/* ensure main content sits to the right of the fixed sidebar with 50px gap
+  Use left padding on the page wrapper so the fixed sidebar cannot overlap content. */
+.wrap{padding-left:calc(var(--sidebar-size) + 50px)}
+.main{margin-left:0; width:100%; padding:0 16px; margin-top:0; margin-bottom:0; margin-right:0; box-sizing:border-box;position:relative;z-index:0}
+
+.side-inner{display:flex;flex-direction:column;gap:12px;height:100%;padding:0px 18px;align-items:center;text-align:center}
+.name{font-size:1.4rem;margin:0 0 4px 0;line-height:1;font-family:Merriweather, serif}
+.role{color:var(--accent-bright);font-weight:600;font-size:0.95rem}
+
+.sidebar-bio{color:rgba(255,255,255,0.92);font-size:0.95rem;line-height:1.45;margin-top:6px;list-style:disc;padding-left:18px;text-align:justify;text-justify:inter-word}
+
+.avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px;margin:0 auto 6px;box-shadow:0 8px 20px rgba(0,0,0,0.18);overflow:hidden}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.avatar span{display:inline-block;line-height:1}
+
+
+.side-nav{display:flex;flex-direction:column;gap:6px;margin-top:8px;width:100%}
+.sidebar .nav-link{padding:8px 10px;border-radius:8px;color:rgba(255,255,255,0.95);transition:all .14s ease;border:1px solid transparent;text-align:center;text-decoration:none}
+.sidebar .nav-link:hover{color:var(--accent-bright);background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.04);transform:translateX(4px);font-weight:600}
+.nav-link.active{font-weight:600;color:var(--accent-bright)}
+
+.contacts{margin-top:auto;display:flex;flex-direction:row;gap:10px;justify-content:center;align-items:center}
+.contact{display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:6px;color:var(--muted);border:none;transition:all .14s ease;cursor:pointer}
+.contact .icon{width:32px;height:32px;display:inline-block}
+.contact svg{pointer-events:none}
+
+/* contact info (emails) below icons — non-overlapping and small */
+.contact-info{width:100%;text-align:center;margin-top:8px}
+.contact-info h6{margin:0;font-size:0.78rem;color:rgba(255,255,255,0.85);font-weight:500}
+
+/* Mobile menu toggle button (hidden on larger screens) */
+.menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.95);padding:6px 10px;border-radius:8px;font-size:18px;cursor:pointer}
+.menu-toggle:focus{outline:3px solid rgba(14,165,255,0.14);outline-offset:2px}
+
+.side-nav.open{display:flex}
+.contact:hover{color:var(--accent);transform:scale(1.15)}
+
+.panel{padding:16px;margin:20px 0px 50px;border-radius:12px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);width:100%;max-width:none;transition:box-shadow .24s ease,transform .24s ease}
+.panel:hover{box-shadow:0 12px 32px rgba(30,64,175,0.12);transform:translateY(-2px)}
+.section-title{font-family:Merriweather, serif;font-weight:700;margin:8px 0 12px 0;color:var(--accent);font-size:1.12rem}
+.lead{color:var(--fg);margin:0 0 8px 0}
+.list{margin:0;padding-left:18px}
+
+/* Skills styling */
+.skills-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.skill-category{display:flex;flex-direction:column;gap:10px;padding:16px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
+.skill-category:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(14,165,255,0.08)}
+.skill-label{margin:0 0 8px 0;font-size:0.95rem;font-weight:700;color:var(--fg);text-transform:uppercase;letter-spacing:0.5px;font-family:Inter, Roboto, sans-serif}
+.skill-badges{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.skill-badge{display:inline-block;background:linear-gradient(135deg,rgba(37,99,235,0.08),rgba(14,165,255,0.06));border:1px solid rgba(37,99,235,0.12);color:var(--fg);padding:6px 12px;border-radius:20px;font-size:0.87rem;font-weight:500;transition:all .2s ease;white-space:nowrap}
+.skill-badge:hover{background:linear-gradient(135deg,rgba(37,99,235,0.15),rgba(14,165,255,0.12));transform:translateY(-2px);box-shadow:0 6px 12px rgba(37,99,235,0.08)}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;justify-items:center}
+.project-card{background:linear-gradient(180deg,#fff,#fbfdff);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;padding:8px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease;width:100%;max-width:260px;box-sizing:border-box}
+.project-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 18px 40px rgba(14,165,255,0.12);border-color:var(--accent-bright)}
+.project-name{text-align:center;font-weight:600;color:var(--fg);padding:6px}
+
+/* Modal for project details */
+.modal-backdrop{position:fixed;inset:0;background:rgba(10,20,40,0.45);display:none;align-items:center;justify-content:center;z-index:120}
+.modal{background:#fff;color:var(--fg);max-width:720px;width:92%;padding:20px;border-radius:12px;border:1px solid var(--border);box-shadow:0 18px 60px rgba(10,20,40,0.2)}
+.modal h4{margin:0 0 8px 0;color:var(--accent)}
+.modal p{margin:0 0 12px 0}
+.modal .close{display:inline-block;padding:8px 12px;background:transparent;border:1px solid var(--border);border-radius:8px;cursor:pointer}
+.modal-backdrop.show{display:flex}
+
+@media (max-width: 980px){
+  .wrap{display:block}
+  .wrap{padding-left:0}
+  .sidebar{position:static;width:100%;height:auto;display:flex;padding:16px;flex-direction:column;align-items:center;gap:12px;border-radius:0;border-right:none;border-bottom:1px solid rgba(0,0,0,0.06)}
+  .side-inner{flex-direction:column;gap:12px;align-items:center;height:auto;padding:0px 12px}
+  .side-nav{display:flex;flex-direction:column;gap:8px;justify-content:center;width:100%}
+  .side-nav.mobile-hidden{display:none}
+  .contacts{display:flex;margin-top:0}
+  .main{margin-left:0;width:100%;padding:12px}
+  .skill-grid{grid-template-columns:1fr}
+  .nav-link{padding:14px;min-height:44px}
+  .projects-grid{grid-template-columns:1fr}
+}
+
+@media (max-width:600px){
+  .name{font-size:1.2rem}
+}
+
+/* Hyperlink styling - no underline, attractive color, hover arrow effect */
+a:not(.nav-link):not(.contact):not(.badge-link){color:var(--accent-bright);font-weight:600;text-decoration:none;transition:all .2s ease;position:relative}
+a:not(.nav-link):not(.contact):not(.badge-link)::after{content:' →';display:inline;opacity:0;margin-left:4px;transition:opacity .2s ease,margin-left .2s ease}
+a:not(.nav-link):not(.contact):not(.badge-link):hover{color:var(--accent);opacity:.9}
+a:not(.nav-link):not(.contact):not(.badge-link):hover::after{opacity:1;margin-left:8px}
+
+/* Badge link styling for project links */
+.badge-link{display:inline-flex;align-items:center;padding:6px 12px;background:var(--accent);color:#fff;text-decoration:none;border-radius:20px;font-size:0.85rem;font-weight:600;transition:all .2s ease}
+.badge-link:hover{background:var(--accent-bright);transform:translateY(-2px);box-shadow:0 4px 12px rgba(14,165,255,0.25)}
+
+/* Tech stack badges */
+.tech-badge{display:inline-block;padding:4px 10px;background:rgba(37,99,235,0.1);color:var(--accent);border:1px solid var(--border);border-radius:16px;font-size:0.8rem;font-weight:500;white-space:nowrap}
+
+/* small accessibility improvements */
+a:focus{outline:3px solid rgba(30,64,175,0.12);outline-offset:2px}
